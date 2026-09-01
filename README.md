@@ -1,7 +1,31 @@
 # armandorodriguez.cloud — personal site
 
-Single-page résumé/portfolio site. Pure static HTML/CSS — no build step, no dependencies.
-Deploys to any static host.
+Single-page résumé/portfolio site plus a Markdown-powered blog.
+Deploys to Azure Static Web Apps (GitHub Actions builds the blog, then uploads).
+
+## Blog — how to add a post
+
+1. Create a Markdown file in `blog/posts/`, named `YYYY-MM-DD-slug.md`, e.g.
+   `blog/posts/2026-07-10-building-my-edge-ai-lab.md`.
+2. Start it with frontmatter, then write the body in Markdown:
+
+   ```
+   ---
+   title: Building My Edge AI Lab
+   date: 2026-07-10
+   excerpt: One or two sentences shown on the card and blog index.
+   tags: Edge AI, NVIDIA, Homelab
+   ---
+
+   Your post content here. Headings, **bold**, `code`, lists, links, images all work.
+   ```
+3. Commit and push. The GitHub Action runs `npm run build`, which renders the post to
+   `blog/<slug>.html`, rebuilds `blog/index.html`, and updates `blog/posts.json`
+   (the homepage "Writing" section reads the latest 3 from that file).
+
+Preview locally before pushing: `npm install` once, then `npm run build` and open the site
+(`python -m http.server` in this folder). Generated files (`blog/*.html`, `blog/posts.json`)
+are git-ignored and produced fresh by CI.
 
 ## Files
 - `index.html` — the whole site
