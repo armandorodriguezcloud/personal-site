@@ -303,6 +303,7 @@ footer .grad-text{font-weight:500}
         <a href="#skills" onclick="closeNav()">Expertise</a>
         <a href="#experience" onclick="closeNav()">Experience</a>
         <a href="#projects" onclick="closeNav()">Labs</a>
+        <a href="#writing" onclick="closeNav()">Blog</a>
         <a href="#certs" onclick="closeNav()">Certifications</a>
         <a href="#personal" onclick="closeNav()">Personal</a>
         <a class="nav-cta" href="#contact" onclick="closeNav()">Get in touch</a>
@@ -489,6 +490,16 @@ footer .grad-text{font-weight:500}
         <a class="proj-repo" href="https://github.com/armandorodriguezcloud/vmware-homelab" target="_blank" rel="noopener"><svg class="ico"><use href="#i-github"/></svg> View on GitHub <span class="arrow">→</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="reveal"><div class="kicker">Writing</div>
+    <h2 class="sec-title">From the blog</h2>
+    <p class="sec-intro">Notes on cloud, edge AI, infrastructure, and what I'm building in the lab.</p></div>
+    <div class="proj-grid" id="blog-cards"></div>
+    <div style="margin-top:26px"><a class="btn btn-ghost" href="/blog/"><svg class="ico"><use href="#i-terminal"/></svg> All posts</a></div>
   </div>
 </section>
 
@@ -717,6 +728,23 @@ draw();
   }
 
   select(JOBS.length-1,true); // default to current role (rightmost)
+})();
+
+// Blog: load latest posts from the generated index
+(function(){
+  var el=document.getElementById('blog-cards');
+  if(!el)return;
+  fetch('/blog/posts.json').then(function(r){return r.ok?r.json():[];}).then(function(posts){
+    if(!posts||!posts.length){el.innerHTML='<p class="sec-intro" style="margin:0">First post coming soon.</p>';return;}
+    el.innerHTML=posts.slice(0,3).map(function(p){
+      return '<a class="proj" href="'+p.url+'">'+
+        '<div class="pnum">'+p.date+'</div>'+
+        '<h3>'+p.title+'</h3>'+
+        '<p>'+p.excerpt+'</p>'+
+        '<div class="ptags">'+(p.tags||[]).map(function(t){return '<span class="ptag">'+t+'</span>';}).join('')+'</div>'+
+      '</a>';
+    }).join('');
+  }).catch(function(){el.innerHTML='<p class="sec-intro" style="margin:0">First post coming soon.</p>';});
 })();
 </script>
 </body>
