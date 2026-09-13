@@ -449,8 +449,8 @@ footer .grad-text{font-weight:500}
       </div>
       <div class="proj reveal">
         <div class="pnum">Project 06</div>        <h3>Self-Hosted Observability Stack</h3>
-        <p>Monitoring platform for the homelab, with Prometheus scraping metrics across hosts and containers, Grafana dashboards for health and capacity, and alerting that fires on service degradation. Full visibility into every node and service.</p>
-        <div class="ptags"><span class="ptag">Prometheus</span><span class="ptag">Grafana</span><span class="ptag">Alerting</span><span class="ptag">Dashboards</span></div>
+        <p>Monitoring stack for the homelab, running on the same bare-metal RTX 4090 Ubuntu box as the AI lab. Prometheus scrapes host metrics through node-exporter, per-container metrics through cAdvisor, and live GPU telemetry through NVIDIA DCGM, all rendered in Grafana dashboards for utilization, temperature, memory, and capacity. Visibility from the node up to the GPU.</p>
+        <div class="ptags"><span class="ptag">Prometheus</span><span class="ptag">Grafana</span><span class="ptag">NVIDIA DCGM</span><span class="ptag">node-exporter</span><span class="ptag">cAdvisor</span></div>
         <a class="proj-repo" href="https://github.com/armandorodriguezcloud/observability-stack" target="_blank" rel="noopener"><svg class="ico"><use href="#i-github"/></svg> View on GitHub <span class="arrow">→</span></a>
       </div>
       <div class="proj reveal">
@@ -486,8 +486,8 @@ footer .grad-text{font-weight:500}
       <div class="proj reveal">
         <div class="pnum">Project 12</div>
         <h3>Personal Cloud Media Server</h3>
-        <p>Self-hosted Jellyfin media platform on Linux with hardware-accelerated transcoding, organized libraries, and secure remote access fronted by Cloudflare. A hands-on exercise in storage, networking, reverse proxying, and service hardening.</p>
-        <div class="ptags"><span class="ptag">Jellyfin</span><span class="ptag">Linux</span><span class="ptag">Cloudflare</span><span class="ptag">Docker</span></div>
+        <p>Self-hosted media platform on Linux built around Jellyfin, with an automated library pipeline (Sonarr, Radarr, Prowlarr, qBittorrent) whose egress is isolated through a Gluetun VPN gateway, and Jellyseerr handling requests. Fronted by an Nginx Proxy Manager reverse proxy with a Cloudflare tunnel for remote access, and the Docker socket brokered through a hardened proxy container. A hands-on exercise in container orchestration, network isolation, reverse proxying, and service hardening.</p>
+        <div class="ptags"><span class="ptag">Jellyfin</span><span class="ptag">arr Stack</span><span class="ptag">Gluetun VPN</span><span class="ptag">Nginx Proxy Manager</span><span class="ptag">Cloudflare Tunnel</span></div>
         <a class="proj-repo" href="https://github.com/armandorodriguezcloud/cloud-media-server" target="_blank" rel="noopener"><svg class="ico"><use href="#i-github"/></svg> View on GitHub <span class="arrow">→</span></a>
       </div>
       <div class="proj reveal">
