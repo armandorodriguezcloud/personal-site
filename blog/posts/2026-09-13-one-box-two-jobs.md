@@ -9,17 +9,14 @@ The bare-metal Ubuntu workstation behind my [GPU AI Inference Lab](/blog/gpu-ai-
 
 Here is what is actually running, and why each piece is there.
 
-## A self-hosted media stack, wired like real infrastructure
+## A self-hosted stack, wired like real infrastructure
 
-The headline service is a Jellyfin media server, but the interesting part is everything around it. About fifteen containers work together:
+The user-facing service is a Jellyfin media server, but the interesting part is everything around it. A set of containers work together, and each choice mirrors something that matters in a real environment:
 
-- **Automated library pipeline:** Sonarr, Radarr, and Prowlarr coordinate what comes in, with qBittorrent doing the transfers.
-- **Isolated egress:** every bit of that transfer traffic is forced through a Gluetun VPN gateway. The download client has no direct route to the internet. If the tunnel drops, the traffic stops, which is the whole point.
-- **Requests:** Jellyseerr gives a clean front door for requesting new titles without touching the admin tools.
 - **Reverse proxy and remote access:** Nginx Proxy Manager terminates and routes traffic internally, and a Cloudflare tunnel exposes only what I choose, with no inbound ports opened on my network.
 - **Hardened Docker access:** the containers that need to see Docker talk to a socket proxy, not the raw Docker socket. That one choice shrinks the blast radius if any single container is compromised.
 
-None of this is exotic, and that is the point. It is the same set of moves that matter in a real environment: segment the network, isolate egress, front services with a proxy, avoid open ports, and never hand a container more privilege than it needs.
+None of this is exotic, and that is the point. It is the same set of moves that matter anywhere: front services with a proxy, avoid open inbound ports, and never hand a container more privilege than it needs.
 
 ## Observability, from the node up to the GPU
 
